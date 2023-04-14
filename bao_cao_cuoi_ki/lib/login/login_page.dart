@@ -57,7 +57,10 @@ class _LoginPageState extends State<LoginPage> {
             Icons.arrow_back_ios,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            GlobalMethods.navigateTo(
+                ctx: context, routeName: SiginUpPage.routeName);
+          },
         ),
       ),
       body: Form(

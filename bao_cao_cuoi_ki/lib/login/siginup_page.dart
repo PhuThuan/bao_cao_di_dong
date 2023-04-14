@@ -79,7 +79,10 @@ class _SiginUpPageState extends State<SiginUpPage> {
             Icons.arrow_back_ios,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            GlobalMethods.navigateTo(
+                ctx: context, routeName: LoginPage.routeName);
+          },
         ),
       ),
       body: Form(

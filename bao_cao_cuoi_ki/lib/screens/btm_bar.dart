@@ -1,5 +1,5 @@
 import 'package:bao_cao_cuoi_ki/provider/dart_theme_provider.dart';
-import 'package:bao_cao_cuoi_ki/screens/cart.dart';
+import 'package:bao_cao_cuoi_ki/screens/cart/cart_screen.dart';
 import 'package:bao_cao_cuoi_ki/screens/categories.dart';
 import 'package:bao_cao_cuoi_ki/screens/home.dart';
 import 'package:bao_cao_cuoi_ki/screens/user.dart';
@@ -15,7 +15,7 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   final List<Map<String, dynamic>> _pages = [
     {'page': const HomeScreen(), 'title': 'Home Screen'},
     {'page': CategoriesScreen(), 'title': 'Categories Screen'},
