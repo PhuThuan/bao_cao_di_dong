@@ -1,4 +1,6 @@
+import 'package:bao_cao_cuoi_ki/login/login_page.dart';
 import 'package:bao_cao_cuoi_ki/provider/dart_theme_provider.dart';
+import 'package:bao_cao_cuoi_ki/services/global_methods.dart';
 import 'package:bao_cao_cuoi_ki/widgets/text_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -177,7 +179,8 @@ class _UserScreenState extends State<UserScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {GlobalMethods.navigateTo(
+                            ctx: context, routeName: LoginPage.routeName);},
                 child: TextWidget(
                   color: Colors.cyan,
                   text: 'Ok',
