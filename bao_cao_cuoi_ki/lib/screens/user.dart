@@ -13,6 +13,15 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  final TextEditingController _addressTextEditingController =
+      TextEditingController(text: '');
+
+  @override
+  void dispose() {
+    _addressTextEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
@@ -47,7 +56,7 @@ class _UserScreenState extends State<UserScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              print('My name is pressed');
+                              // print('My name is pressed');
                             }),
                     ],
                   ),
@@ -61,20 +70,22 @@ class _UserScreenState extends State<UserScreen> {
                   textSize: 18,
                   // isTitle: true,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Divider(
+                const Divider(
                   thickness: 2,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ListTiles(
                   title: 'Address',
                   titleSubtitle: 'Subtitle here',
                   iconLeading: IconlyLight.profile,
-                  onPressed: () {},
+                  onPressed: () async {
+                    await _showAddressDialog();
+                  },
                   color: color,
                 ),
                 ListTiles(
@@ -119,7 +130,9 @@ class _UserScreenState extends State<UserScreen> {
                 ListTiles(
                   title: 'Logout',
                   iconLeading: IconlyLight.logout,
-                  onPressed: () {},
+                  onPressed: () async {
+                    await _showLogoutDialog();
+                  },
                   color: color,
                 ),
               ],
@@ -129,31 +142,102 @@ class _UserScreenState extends State<UserScreen> {
       ),
     );
   }
-}
 
-Widget ListTiles({
-  required String title,
-  String? titleSubtitle,
-  required IconData iconLeading,
-  required Function onPressed,
-  required Color color,
-}) {
-  return ListTile(
-    title: TextWidget(
-      text: title,
-      color: color,
-      textSize: 22,
-      // isTitle: true,
-    ),
-    subtitle: TextWidget(
-      text: titleSubtitle == null ? "" : titleSubtitle,
-      color: color,
-      textSize: 18,
-    ),
-    leading: Icon(iconLeading),
-    trailing: const Icon(IconlyLight.arrowRight2),
-    onTap: () {
-      onPressed();
-    },
-  );
+  Future<void> _showLogoutDialog() async {
+    await await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Row(
+              children: [
+                Image.asset(
+                  'assets/images/logout.jpg',
+                  height: 20,
+                  width: 20,
+                  fit: BoxFit.fill,
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                const Text('Thoát'),
+              ],
+            ),
+            content: const Text('bạn có muốn thoát'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: TextWidget(
+                  color: Colors.cyan,
+                  text: 'Hủy bỏ',
+                  textSize: 18,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: TextWidget(
+                  color: Colors.cyan,
+                  text: 'Ok',
+                  textSize: 18,
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<void> _showAddressDialog() async {
+    await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Update'),
+            content: TextField(
+              // onChanged: (value) {
+              //   print(
+              //       '_addressTextController.text ${_addressTextEditingController.text}');
+              // },
+              controller: _addressTextEditingController,
+              maxLines: 5,
+              decoration: const InputDecoration(hintText: "Your address"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {},
+                child: const Text('Update'),
+              )
+            ],
+          );
+        });
+  }
+
+  Widget ListTiles({
+    required String title,
+    String? titleSubtitle,
+    required IconData iconLeading,
+    required Function onPressed,
+    required Color color,
+  }) {
+    return ListTile(
+      title: TextWidget(
+        text: title,
+        color: color,
+        textSize: 22,
+        // isTitle: true,
+      ),
+      subtitle: TextWidget(
+        text: titleSubtitle == null ? "" : titleSubtitle,
+        color: color,
+        textSize: 18,
+      ),
+      leading: Icon(iconLeading),
+      trailing: const Icon(IconlyLight.arrowRight2),
+      onTap: () {
+        onPressed();
+      },
+    );
+  }
 }
