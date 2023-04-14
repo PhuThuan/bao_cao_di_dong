@@ -1,4 +1,6 @@
 import 'package:bao_cao_cuoi_ki/consts/theme_data.dart';
+import 'package:bao_cao_cuoi_ki/inner_screens/feeds_screen.dart';
+import 'package:bao_cao_cuoi_ki/inner_screens/on_sale_screen.dart';
 import 'package:bao_cao_cuoi_ki/provider/dart_theme_provider.dart';
 import 'package:bao_cao_cuoi_ki/screens/btm_bar.dart';
 import 'package:bao_cao_cuoi_ki/screens/home.dart';
@@ -41,13 +43,17 @@ class _MyAppState extends State<MyApp> {
           return themeChangeProvider;
         })
       ],
-      child: Consumer<DarkThemeProvider>(
-          builder: (context, themeProvider, child) {
+      child:
+          Consumer<DarkThemeProvider>(builder: (context, themeProvider, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: Styles.themeData(themeChangeProvider.getDarkTheme, context),
           home: const BottomBarScreen(),
+          routes: {
+            OnSaleScreen.routeName: (context) => const OnSaleScreen(),
+            FeedsScreen.routeName: (context) => const FeedsScreen(),
+          },
         );
       }),
     );

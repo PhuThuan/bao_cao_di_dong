@@ -1,5 +1,5 @@
 import 'package:bao_cao_cuoi_ki/services/utils.dart';
-import 'package:bao_cao_cuoi_ki/widgets/categories_wiget.dart';
+import 'package:bao_cao_cuoi_ki/widgets/categories_widget.dart';
 import 'package:bao_cao_cuoi_ki/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
