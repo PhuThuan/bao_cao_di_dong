@@ -2,6 +2,7 @@ import 'package:bao_cao_cuoi_ki/login/login_page.dart';
 import 'package:bao_cao_cuoi_ki/provider/dart_theme_provider.dart';
 import 'package:bao_cao_cuoi_ki/services/global_methods.dart';
 import 'package:bao_cao_cuoi_ki/widgets/text_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -151,17 +152,17 @@ class _UserScreenState extends State<UserScreen> {
         builder: (context) {
           return AlertDialog(
             title: Row(
-              children: [
-                Image.asset(
-                  'assets/images/logout.jpg',
-                  height: 20,
+              children: const [
+                // Image.asset(
+                //   'assets/images/logout.jpg',
+                //   height: 10,
+                //   width: 10,
+                //   fit: BoxFit.fill,
+                // ),
+                SizedBox(
                   width: 20,
-                  fit: BoxFit.fill,
                 ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Text('Thoát'),
+                Text('Thoát'),
               ],
             ),
             content: const Text('bạn có muốn thoát'),
@@ -179,8 +180,10 @@ class _UserScreenState extends State<UserScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () {GlobalMethods.navigateTo(
-                            ctx: context, routeName: LoginPage.routeName);},
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                    GlobalMethods.navigateTo(ctx: context, routeName: LoginPage.routeName); 
+                },
                 child: TextWidget(
                   color: Colors.cyan,
                   text: 'Ok',

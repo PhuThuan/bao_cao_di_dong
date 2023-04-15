@@ -1,9 +1,12 @@
 import 'package:bao_cao_cuoi_ki/provider/dart_theme_provider.dart';
+import 'package:bao_cao_cuoi_ki/screens/product_screen.dart';
+import 'package:bao_cao_cuoi_ki/services/global_methods.dart';
 import 'package:bao_cao_cuoi_ki/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoriesWiget extends StatelessWidget {
+
   const CategoriesWiget({
     super.key,
     required this.catText,
@@ -19,7 +22,10 @@ class CategoriesWiget extends StatelessWidget {
     final Color color = themeState.getDarkTheme ? Colors.white : Colors.black;
     return InkWell(
       onTap: () {
-        print('Catogory pressed');
+        if (catText == 'Áo Khoác') {
+          GlobalMethods.navigateTo(
+              ctx: context, routeName: ProductsScreen.routeName);
+        }
       },
       child: Container(
         // height: screenWidth * 0.6,

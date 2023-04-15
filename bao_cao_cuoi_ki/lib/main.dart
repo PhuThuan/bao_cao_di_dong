@@ -4,8 +4,11 @@ import 'package:bao_cao_cuoi_ki/inner_screens/on_sale_screen.dart';
 import 'package:bao_cao_cuoi_ki/login/login_page.dart';
 import 'package:bao_cao_cuoi_ki/login/siginup_page.dart';
 import 'package:bao_cao_cuoi_ki/provider/dart_theme_provider.dart';
+import 'package:bao_cao_cuoi_ki/provider/product_provider.dart';
 import 'package:bao_cao_cuoi_ki/screens/btm_bar.dart';
+import 'package:bao_cao_cuoi_ki/screens/categories.dart';
 import 'package:bao_cao_cuoi_ki/screens/home.dart';
+import 'package:bao_cao_cuoi_ki/screens/product_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +50,8 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) {
           return themeChangeProvider;
-        })
+        }),
+        ChangeNotifierProvider(create: (_) => ProductsProvider()),
       ],
       child:
           Consumer<DarkThemeProvider>(builder: (context, themeProvider, child) {
@@ -68,6 +72,8 @@ class _MyAppState extends State<MyApp> {
             FeedsScreen.routeName: (context) => const FeedsScreen(),
             SiginUpPage.routeName: (context) => const SiginUpPage(),
             LoginPage.routeName: (context) => LoginPage(),
+            ProductsScreen.routeName: (context) => ProductsScreen(),
+            BottomBarScreen.routeName: (context) => BottomBarScreen(),
           },
         );
       }),
